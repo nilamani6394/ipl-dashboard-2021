@@ -12,7 +12,7 @@ import java.time.LocalDate
 interface MatchRepository : CrudRepository<Match,Long> {
     fun getByTeam1OrTeam2OrderByDateDesc(teamName1: String?,teamName2: String?,pageable: Pageable):List<Match>
 
-    @Query("select m from Match m where (m.team1 = :teamName or m.team2 = :teamName) and m.date between :dateStart and :dateEnd order by date desc ")
+    @Query("SELECT m FROM Match m WHERE (m.team1 = :teamName OR m.team2 = :teamName) AND m.date BETWEEN :dateStart AND :dateEnd ORDER BY DATE(date) DESC ")
     fun getMatchesByTeamBetweenDates(
         @Param("teamName")teamName: String?,
         @Param("startDate")startDate: LocalDate?,
